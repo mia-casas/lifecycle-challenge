@@ -48,14 +48,17 @@ class PokeFetch extends Component {
     console.log(this.state.timer)
   }
 
-  componentDidUpdate(){
+  componentDidMount(){
     setInterval(() => {this.timer()}, 1000)
+  }
+  componentWillUnmount() {
+    clearInterval(() => (this.componentDidMount))
   }
 
   render() {
     return (
       <div className={'wrapper'}>
-        <button className={'start'} onClick={() => this.fetchPokemon()}>Start!</button>
+        <button className={'start'} onClick={() => this.fetchPokemon(this.setState({timer:10}))}>Start!</button>
         <h1 className={'timer'} >Timer Display</h1>
         <h3>{this.state.timerRunning ? this.state.timer : null}</h3>
         <div className={'pokeWrap'}>
